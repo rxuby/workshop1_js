@@ -5,7 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
 
-const port = process.env.PORT || 5000;
+// const port = process.env.PORT || 5000;
 const authRoutes = require("./routes/authRoutes.js");
 const userRoutes = require("./routes/userRoutes.js");
 const productRoutes = require("./routes/productRoutes.js");
@@ -37,6 +37,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -53,7 +54,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
-
 
 module.exports = app;
